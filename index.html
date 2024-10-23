@@ -37,28 +37,60 @@
     <!-- COOKIE BANNER -->
     <script type="module" src="pie-cookie-banner_lit.js"></script>
 
-    <!-- COOKIE BANNER CONFIG   -->
+    <!-- COOKIE BANNER CONFIG -->
     <script type="module">
-        // LOCALE setup example
-        // all available locales can be found here: https://unpkg.com/browse/@justeattakeaway/pie-cookie-banner/locales/
-        const response = await fetch('https://unpkg.com/@justeattakeaway/pie-cookie-banner/locales/fr-fr.json')
-        const frFR = await response.json()
+        // --- EXAMPLE OF CONDITIONAL RENDERING
+        // here you can read if preferences have been set by the user - you can capture this information in cookies itself
+        const areCookiesSelected = false; // replace with your state, could be read from a cookie
+        // This if statement is all you need for conditional rendering
+        if (!areCookiesSelected) {
 
-        const banner = document.querySelector('pie-cookie-banner');
-        banner.locale = frFR
+        // --- EXAMPLE OF USER PREFERENCES - SETTING DEFAULT PREFERENCES
+            const cookieBannerAll = true // replace with your state, could be read from a cookie
+            const cookieBannerNecessary = true // replace with your state, could be read from a cookie
+            const cookieBannerFunctional = true // replace with your state, could be read from a cookie
+            const cookieBannerAnalytical = true // replace with your state, could be read from a cookie
+            const cookieBannerPersonalized = true // replace with your state, could be read from a cookie
 
-        // EVENT listener example, will be triggered when clicking accept-all (Tout accepter)
-        banner.addEventListener('pie-cookie-banner-accept-all', () => {
-            console.log('pie-cookie-banner-accept-all event emitted')
-            // set up cookies
-        })
+            const preferences = {
+                all: cookieBannerAll,
+                necessary: cookieBannerNecessary,
+                functional: cookieBannerFunctional,
+                analytical: cookieBannerAnalytical,
+                personalized: cookieBannerPersonalized
+            }
+
+            const cookieBannerContainer = document.querySelector('#cookie-banner-container')
+
+            var cookieBannerTemplateString = `
+                <pie-cookie-banner
+                    hasPrimaryActionsOnly
+                    defaultPreferences='${JSON.stringify(preferences)}'
+                    cookieTechnologiesLink="https://justeattakeaway.com"
+                    cookieStatementLink="https://justeattakeaway.com">
+                </pie-cookie-banner>
+            `
+
+            cookieBannerContainer.innerHTML = cookieBannerTemplateString
+
+            // --- LOCALE SETUP EXAMPLE
+            // all available locales can be found here: https://unpkg.com/browse/@justeattakeaway/pie-cookie-banner/locales/
+            const response = await fetch('https://unpkg.com/@justeattakeaway/pie-cookie-banner/locales/fr-fr.json')
+            const frFR = await response.json()
+
+            const banner = document.querySelector('pie-cookie-banner');
+            banner.locale = frFR
+
+            // -- EVENT listener example, will be triggered when clicking accept-all (Tout accepter)
+            banner.addEventListener('pie-cookie-banner-accept-all', () => {
+                console.log('pie-cookie-banner-accept-all event emitted')
+                // set up cookies
+                // here you can also set up user preferences
+            })
+        }
     </script>
 </head>
 <body>
-<pie-cookie-banner
-    hasPrimaryActionsOnly
-    cookieTechnologiesLink="https://justeattakeaway.com"
-    cookieStatementLink="https://justeattakeaway.com">
-</pie-cookie-banner>
+<div id="cookie-banner-container"></div>
 </body>
 </html>
