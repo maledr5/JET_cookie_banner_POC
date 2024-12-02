@@ -37,7 +37,7 @@
     <!-- COOKIE BANNER -->
     <script type="module" src="./cdn_dist/index.js"></script>
 
-    <!-- COOKIE BANNER EXAMPLE - using innerHTML -->
+    <!-- COOKIE BANNER EXAMPLE - using querySelector -->
     <script type="module">
         // --- EXAMPLE OF CONDITIONAL RENDERING
         // here you can read if preferences have been set by the user - you can capture this information in cookies itself
@@ -52,7 +52,8 @@
             const cookieBannerAnalytical = true // replace with your state, could be read from a cookie
             const cookieBannerPersonalized = true // replace with your state, could be read from a cookie
 
-            const preferences = {
+            const banner = document.querySelector('pie-cookie-banner');
+            banner.defaultPreferences = {
                 all: cookieBannerAll,
                 necessary: cookieBannerNecessary,
                 functional: cookieBannerFunctional,
@@ -60,23 +61,7 @@
                 personalized: cookieBannerPersonalized
             }
 
-            var cookieBannerTemplateString = `
-                <pie-cookie-banner
-                    hasPrimaryActionsOnly
-                    defaultPreferences='${JSON.stringify(preferences)}'
-                    cookieTechnologiesLink="https://justeattakeaway.com"
-                    cookieStatementLink="https://justeattakeaway.com"
-                    language= "fr"
-                    country= "FR"
-                >
-                </pie-cookie-banner>
-            `
-
-            const cookieBannerContainer = document.querySelector('#cookie-banner-container')
-            cookieBannerContainer.innerHTML = cookieBannerTemplateString
-
             // -- EVENT listener example, will be triggered when clicking accept-all (Tout accepter)
-            const banner = document.querySelector('pie-cookie-banner');
             banner.addEventListener('pie-cookie-banner-accept-all', () => {
                 console.log('pie-cookie-banner-accept-all event emitted')
                 // set up cookies
@@ -86,6 +71,13 @@
     </script>
 </head>
 <body>
-<div id="cookie-banner-container"></div>
+<pie-cookie-banner
+    hasPrimaryActionsOnly
+    cookieTechnologiesLink="https://justeattakeaway.com"
+    cookieStatementLink="https://justeattakeaway.com"
+    language= "fr"
+    country= "FR"
+>
+</pie-cookie-banner>
 </body>
 </html>
