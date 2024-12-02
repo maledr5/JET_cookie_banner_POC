@@ -35,18 +35,9 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/@justeattakeaway/pie-css/dist/index.css" />
 
     <!-- COOKIE BANNER -->
-    <script type="module" src="pie-cookie-banner_lit.js"></script>
-
-    <!-- COOKIE BANNER CONFIG   -->
-    <script type="module">
+    <script type="module" src="./cdn_dist/index.js">
         // LOCALE setup example
-        // all available locales can be found here: https://unpkg.com/browse/@justeattakeaway/pie-cookie-banner/locales/
-        const response = await fetch('https://unpkg.com/@justeattakeaway/pie-cookie-banner/locales/fr-fr.json')
-        const frFR = await response.json()
-
         const banner = document.querySelector('pie-cookie-banner');
-        banner.locale = frFR
-
         // EVENT listener example, will be triggered when clicking accept-all (Tout accepter)
         banner.addEventListener('pie-cookie-banner-accept-all', () => {
             console.log('pie-cookie-banner-accept-all event emitted')
@@ -58,7 +49,10 @@
 <pie-cookie-banner
     hasPrimaryActionsOnly
     cookieTechnologiesLink="https://justeattakeaway.com"
-    cookieStatementLink="https://justeattakeaway.com">
+    cookieStatementLink="https://justeattakeaway.com"
+    language= "fr"
+    country= "FR"
+>
 </pie-cookie-banner>
 </body>
 </html>
