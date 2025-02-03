@@ -1,0 +1,102 @@
+<!-- ALTERNATIVE EXAMPLE OF CONDITIONAL RENDERING -->
+<!-- You can show the cookie banner again by encapsulating the logic
+    in a function that can be triggered again by clicking a button
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- GLOBAL STYLES - FONTS & CSS TOKENS -->
+    <style>
+        @font-face {
+            font-family: JETSansDigital;
+            src: url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-Regular-optimised.woff2') format("woff2"),
+            url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-Regular-optimised.woff') format("woff");
+            font-weight: 400;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: JETSansDigital;
+            src: url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-Bold-optimised.woff2') format("woff2"),
+            url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-Bold-optimised.woff') format("woff");
+            font-weight: 700;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: JETSansDigital;
+            src: url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-ExtraBold-optimised.woff2') format("woff2"),
+            url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JETSansDigital-ExtraBold-optimised.woff') format("woff");
+            font-weight: 800;
+            font-display: swap;
+        }
+        body {
+            font-feature-settings: "tnum"; /* Enable tabular numbers */
+            font-family: JETSansDigital, monospace;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@justeattakeaway/pie-css/dist/index.css" />
+
+    <!-- COOKIE BANNER -->
+    <script type="module" src="./cdn_dist/index.js"></script>
+
+    <!-- COOKIE BANNER EXAMPLE - using innerHTML -->
+    <script type="module">
+        function showCookieBanner() {
+            console.log('showCookieBanner')
+            // --- EXAMPLE OF USER PREFERENCES - SETTING PREFERENCES
+            const cookieBannerAll = true // replace with your state, could be read from a cookie
+            const cookieBannerNecessary = true // replace with your state, could be read from a cookie
+            const cookieBannerFunctional = true // replace with your state, could be read from a cookie
+            const cookieBannerAnalytical = true // replace with your state, could be read from a cookie
+            const cookieBannerPersonalized = true // replace with your state, could be read from a cookie
+
+            const preferences = {
+                all: cookieBannerAll,
+                necessary: cookieBannerNecessary,
+                functional: cookieBannerFunctional,
+                analytical: cookieBannerAnalytical,
+                personalized: cookieBannerPersonalized
+            }
+
+            var cookieBannerTemplateString = `
+                <pie-cookie-banner
+                    hasPrimaryActionsOnly
+                    defaultPreferences='${JSON.stringify(preferences)}'
+                    cookieTechnologiesLink="https://justeattakeaway.com"
+                    cookieStatementLink="https://justeattakeaway.com"
+                    language= "fr"
+                    country= "FR"
+                >
+                </pie-cookie-banner>
+            `
+
+            const cookieBannerContainer = document.querySelector('#cookie-banner-container')
+            cookieBannerContainer.innerHTML = cookieBannerTemplateString
+
+            // -- EVENT listener example, will be triggered when clicking accept-all (Tout accepter)
+            const banner = document.querySelector('pie-cookie-banner');
+            banner.addEventListener('pie-cookie-banner-accept-all', () => {
+                console.log('pie-cookie-banner-accept-all event emitted')
+                // set up cookies
+                // here you can also store user preferences in cookies e.g. all, necessary, functional, etc
+            })
+
+            // We show the banner again when the button is clicked
+            const cookieShowButton = document.querySelector('#cookie-banner-show')
+            cookieShowButton.addEventListener('click', () => {
+                showCookieBanner();
+            })
+        }
+
+        showCookieBanner();
+
+    </script>
+</head>
+<body>
+<button id="cookie-banner-show">Check my cookie preferences</button>
+<div id="cookie-banner-container"></div>
+</body>
+</html>
