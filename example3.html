@@ -84,12 +84,13 @@
                 // here you can also store user preferences in cookies e.g. all, necessary, functional, etc
             })
 
-            // We show the banner again when the button is clicked
-            const cookieShowButton = document.querySelector('#cookie-banner-show')
-            cookieShowButton.addEventListener('click', () => {
-                showCookieBanner();
-            })
         }
+
+        // We show the banner again when the button is clicked
+        const cookieShowButton = document.querySelector('#cookie-banner-show')
+        cookieShowButton.addEventListener('click', () => {
+            showCookieBanner();
+        })
 
         showCookieBanner();
 
