@@ -13,9 +13,9 @@ npx web-dev-server --node-resolve --open --watch
 
 The cookie banner has been bundled together with all necessary components to work, including Lit dependencies.
 This bundle is now available in a CDN to be used ONLY by projects that can not install npm packages.
-More instructions and an additional example can be found in our
-readme, [here](https://github.com/justeattakeaway/pie/tree/main/packages/components/pie-cookie-banner#cdn-usage), and
-the full documentation of our cookie banner is [here](https://pie.design/patterns/cookie-banner/code/)
+More instructions and an additional example can be found in the component's
+[readme](https://github.com/justeattakeaway/pie/tree/main/packages/components/pie-cookie-banner#cdn-usage), and
+the full documentation of the cookie banner is [here](https://pie.design/patterns/cookie-banner/code/)
 
 ### How this examples work
 
